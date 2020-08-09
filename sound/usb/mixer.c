@@ -770,7 +770,7 @@ static int __check_input_term(struct mixer_build *state, int id,
 				struct uac3_input_terminal_descriptor *d = p1;
 
 				err = __check_input_term(state,
-							d->bCSourceID, term);
+							 d->bCSourceID, term);
 				if (err < 0)
 					return err;
 
@@ -828,7 +828,7 @@ static int __check_input_term(struct mixer_build *state, int id,
 				struct uac_selector_unit_descriptor *d = p1;
 				/* call recursively to retrieve channel info */
 				err = __check_input_term(state,
-							d->baSourceID[0], term);
+							 d->baSourceID[0], term);
 				if (err < 0)
 					return err;
 				/* virtual type */
@@ -1198,7 +1198,7 @@ static int mixer_ctl_feature_info(struct snd_kcontrol *kcontrol,
 		if (!cval->initialized) {
 			get_min_max_with_quirks(cval, 0, kcontrol);
 			if (cval->initialized && cval->dBmin >= cval->dBmax) {
-				kcontrol->vd[0].access &= 
+				kcontrol->vd[0].access &=
 					~(SNDRV_CTL_ELEM_ACCESS_TLV_READ |
 					  SNDRV_CTL_ELEM_ACCESS_TLV_CALLBACK);
 				snd_ctl_notify(cval->head.mixer->chip->card,
